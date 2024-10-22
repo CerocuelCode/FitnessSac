@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymelef.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SeoDash Free Bootstrap Admin Template by Adminmart</title>
+  <link rel="shortcut icon" type="image/png" th:href="@{/images/logos/seodashlogo.png}" />
+  <link rel="stylesheet" th:href="@{/css/styles.min.css}" />
+</head>
+
+<body>
+  <!--  Body Wrapper -->
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+    <div class="body-wrapper">
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title d-flex align-items-center gap-2 mb-4">
+                            Entrenadores / <span>Nuevo entrenador</span> 
+                        </h5>
+                        <div class="card">
+                        	<div class="card-body">
+                        		<form th:action="@{/entrenador/actualizar}" th:object="${objEntrenador}" method="POST">
+                        		  <input type="hidden" th:field="*{id}">                        		
+				                  <div class="mb-3">
+				                    <label for="nombres" class="form-label">Nombres</label>
+				                    <input type="text" name="nombres" class="form-control" id="nombres" th:field="*{nombres}">
+				                  </div>
+				                  <div class="mb-3">
+				                    <label for="apellidos" class="form-label">Apellidos</label>
+				                    <input type="text" name="apellidos" class="form-control" id="apellidos" th:field="*{apellidos}">
+				                  </div>
+				                  <div class="mb-3">
+				                    <label for="especialidad" class="form-label">Especialidad</label>
+				                    <input type="text" name="especialidad" class="form-control" id="especialidad" th:field="*{especialidad}">
+				                  </div> 
+				                  <div class="mb-3">
+				                    <label for="contacto" class="form-label">Contacto</label>
+				                    <input type="text" name="contacto" class="form-control" id="contacto" th:field="*{contacto}">
+				                  </div> 	
+				                  <div class="mb-3">
+				                    <label for="disponibilidad" class="form-label">Disponibilidad</label>
+				                    <input type="text" name="disponibilidad" class="form-control" id="disponibilidad" th:field="*{disponibilidad}">
+				                  </div>
+				                  <button type="submit" class="btn btn-primary me-2">Grabar</button>				                  			                  				                   				                                          		
+                        		</form>
+                        	</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    	</div>
+      </div>
+    </div>
+  </div>
+  <script th:src="@{libs/jquery/dist/jquery.min.js}"></script>
+  <script th:src="@{/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/libs/apexcharts/dist/apexcharts.min.js}"></script>
+  <script th:src="@{/libs/simplebar/dist/simplebar.js}"></script>
+  <script th:src="@{/js/sidebarmenu.js}"></script>
+  <script th:src="@{/js/app.min.js}"></script>
+  <script th:src="@{/js/dashboard.js}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+</body>
+
+</html>
