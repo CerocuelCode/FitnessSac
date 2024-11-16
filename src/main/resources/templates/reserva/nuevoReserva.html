@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fitness SAC</title>
+    <link rel="shortcut icon" type="image/png" th:href="@{/images/logos/seodashlogo.png}" />
+    <link rel="stylesheet" th:href="@{/css/styles.min.css}" />
+</head>
+
+<body>
+<!--  Body Wrapper -->
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+    <!-- Sidebar Start -->
+    <aside class="left-sidebar">
+        <!-- Sidebar scroll-->
+        <div>
+            <div class="brand-logo d-flex align-items-center justify-content-between">
+                <a th:href="@{/principal.html}" class="text-nowrap logo-img">
+                    <span class="text-primary fw-bold text-center fs-6">Fitness SAC</span>
+                </a>
+                <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+                    <i class="ti ti-x fs-8"></i>
+                </div>
+            </div>
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+                <ul id="sidebarnav">
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" th:href="@{/home/gestionEntrenador}" aria-expanded="false">
+                            <span class="hide-menu">Gestión de entrenadores</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" th:href="@{/home/gestionPlan}" aria-expanded="false">
+                            <span class="hide-menu">Gestión de planes</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" th:href="@{/home/gestionReserva}" aria-expanded="false">
+                            <span class="hide-menu">Gestión de reservas</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+    </aside>
+    <!--  Sidebar End -->
+    <!--  Main wrapper -->
+    <div class="body-wrapper">
+        <!--  Header Start -->
+        <header class="app-header">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <ul class="navbar-nav">
+                    <li class="nav-item d-block d-xl-none">
+                        <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
+                            <i class="ti ti-menu-2"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-icon-hover" href="javascript:void(0)">
+                            <i class="ti ti-bell-ringing"></i>
+                            <span class="notification bg-primary rounded-circle"></span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <!--  Header End -->
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title fw-semibold mb-4">Nueva Reserva</h5>
+                    <div class="card">
+                        <div class="card-body">
+                            <!-- Inicio del Formulario de Registro de Plan-->
+                            <form th:action="@{/reserva/registrar}" th:object="${objReserva}" method="POST">
+                                <div class="mb-3 col-md-4" style="display: none;">
+                                    <label for="fechaModificacion" class="form-label"> Fecha Modificacion: </label>
+                                    <input type="date" class="form-control" id="fechaModificacion" th:field="*{fechaModificacion}">
+                                </div>
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label for="usuario" class="form-label"> Usuario:</label>
+                                        <select id="usuario" class="select2 form-select" th:field="*{usuario.id}">
+                                            <option th:each="usuario : ${listaUsuarios}" th:value="${usuario.id}" th:text="${usuario.apellidoPaterno} + ' ' + ${usuario.apellidoMaterno} + ' ' + ${usuario.nombre}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="entrenamiento" class="form-label"> Entrenamiento:</label>
+                                        <select id="entrenamiento" class="select2 form-select" th:field="*{entrenamiento.id}">
+                                            <option th:each="entrenamiento : ${listaEntrenamientos}" th:value="${entrenamiento.id}" th:text="${entrenamiento.fecha} + ' ' + ${entrenamiento.tipoEntrenamiento}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="mb-3 col-md-4">
+                                        <label for="estadoReserva" class="form-label"> Estado Reserva: </label>
+                                        <select id="estadoReserva" class="select2 form-select" th:field="*{estadoReserva}">
+                                            <option th:value="CONFIRMADA">Confirmada</option>
+                                            <option th:value="PENDIENTE">Pendiente</option>
+                                            <option th:value="CANCELADA">Cancelada</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 col-md-4">
+                                        <label for="fechaReserva" class="form-label"> Fecha Reserva: </label>
+                                        <input type="date" class="form-control" id="fechaReserva" th:field="*{fechaReserva}">
+                                    </div>
+                                    <div class="mb-3 col-md-4">
+                                        <label for="estado" class="form-label">Estado</label>
+                                        <select id="estado" class="select2 form-select" th:field="*{estado}">
+                                            <option th:value="ACTIVO">Activo</option>
+                                            <option th:value="INACTIVO">Inactivo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button type="submit" name="registrar" class="btn btn-primary">Registrar</button>
+                            </form>
+                            <!-- Fin del Formulario de Registro de Plan-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="py-6 px-6 text-center">
+                <p class="mb-0 fs-4">Design and Developed by <a href="https://adminmart.com/" target="_blank"
+                                                                class="pe-1 text-primary text-decoration-underline">AdminMart.com</a> Distributed by <a href="https://themewagon.com/" target="_blank"
+                                                                                                                                                        class="pe-1 text-primary text-decoration-underline">ThemeWagon</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Obtener la fecha actual en formato yyyy-MM-dd
+    var today = new Date().toISOString().split('T')[0];
+    // Establecer el valor del campo de fecha
+    document.getElementById('fechaModificacion').value = today;
+</script>
+<script th:src="@{libs/jquery/dist/jquery.min.js}"></script>
+<script th:src="@{/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/libs/apexcharts/dist/apexcharts.min.js}"></script>
+<script th:src="@{/libs/simplebar/dist/simplebar.js}"></script>
+<script th:src="@{/js/sidebarmenu.js}"></script>
+<script th:src="@{/js/app.min.js}"></script>
+<script th:src="@{/js/dashboard.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+</body>
+
+</html>

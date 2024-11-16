@@ -2,6 +2,7 @@ package com.FitnessSac.controller;
 
 import java.util.List;
 
+import com.FitnessSac.entity.Plann;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +28,7 @@ public class EntrenadorController {
 	public String nuevo(Model model) {
 		Entrenador objEntrenador = new Entrenador();
 		model.addAttribute("objEntrenador",objEntrenador);
-		return "nuevoEntrenador";
+		return "entrenador/nuevoEntrenador";
 	}
 	
 	@PostMapping("/registrar")
@@ -36,26 +37,38 @@ public class EntrenadorController {
 		
 		List<Entrenador> listaEntrenadores = entrenadorRepository.findAll();
 		model.addAttribute("listaEntrenadores", listaEntrenadores);
-		return "gestionEntrenador";
-	}
-	
-	@GetMapping("/editar/{id}")
-	public String editar(@PathVariable("id")int id, Model model) {
-		Entrenador objEntrenador = entrenadorRepository.findById(id);
-		model.addAttribute("objEntrenador", objEntrenador);
-		return "editarEntrenador";
+		return "entrenador/gestionEntrenador";
 	}
 	
 	@RequestMapping(value="/actualizar", method=RequestMethod.POST)
 	public String actualizar(@ModelAttribute("objEntrenador")Entrenador objEntrenador, Model model) {
 		Entrenador objEntrenadorBD = entrenadorRepository.findById(objEntrenador.getId());
-		objEntrenadorBD.setNombres(objEntrenador.getNombres());
-		objEntrenadorBD.setApellidos(objEntrenador.getApellidos());
+		objEntrenadorBD.setNombre(objEntrenador.getNombre());
+		objEntrenadorBD.setApellidoPaterno(objEntrenador.getApellidoPaterno());
+		objEntrenadorBD.setApellidoMaterno(objEntrenador.getApellidoMaterno());
+		objEntrenadorBD.setFechaNacimiento(objEntrenador.getFechaNacimiento());
+		objEntrenadorBD.setCorreo(objEntrenador.getCorreo());
 		objEntrenadorBD.setEspecialidad(objEntrenador.getEspecialidad());
-		objEntrenadorBD.setContacto(objEntrenador.getContacto());
 		objEntrenadorBD.setDisponibilidad(objEntrenador.getDisponibilidad());
+		objEntrenadorBD.setFechaModificacion(objEntrenador.getFechaModificacion());
+		objEntrenadorBD.setEstado(objEntrenador.getEstado());
 		entrenadorRepository.save(objEntrenadorBD);
 		return "redirect:/home/gestionEntrenador";				
+	}
+
+	@GetMapping("/editar/{id}")
+	public String editar(@PathVariable("id")int id, Model model) {
+		Entrenador objEntrenador = entrenadorRepository.findById(id);
+		model.addAttribute("objEntrenador", objEntrenador);
+		return "entrenador/gestionEntrenador";
+	}
+
+	@GetMapping("/eliminar/{id}")
+	public String eliminar(@PathVariable("id") int id, Model model) {
+		entrenadorRepository.deleteById(id);
+		List<Entrenador> listaEntrenadores = entrenadorRepository.findAll();
+		model.addAttribute("listaEntrenadores", listaEntrenadores);
+		return "entrenador/gestionEntrenador";
 	}
 	
 }

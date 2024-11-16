@@ -1,27 +1,28 @@
 package com.FitnessSac.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
-@Table(name = "Usuarios")
 public class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id_usuario;
+	private int id;
 	private String correo;
 	private String password;
-	private String estado;
 	private String nombre;
 	private String apellidoPaterno;
 	private String apellidoMaterno;
+	private Date fechaModificacion;
+	private String estado;
 
-	public int getId_usuario() {
-		return id_usuario;
+	public int getId() {
+		return id;
 	}
 
-	public void setId_usuario(int id_usuario) {
-		this.id_usuario = id_usuario;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getCorreo() {
@@ -38,14 +39,6 @@ public class Usuario {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getEstado() {
-		return estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
 	}
 
 	public String getNombre() {
@@ -70,5 +63,21 @@ public class Usuario {
 
 	public void setApellidoMaterno(String apellidoMaterno) {
 		this.apellidoMaterno = apellidoMaterno;
+	}
+
+	public Date getFechaModificacion() {
+		return fechaModificacion;
+	}
+
+	public void setFechaModificacion(Date fechaModificacion) {
+		this.fechaModificacion = fechaModificacion;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 }
