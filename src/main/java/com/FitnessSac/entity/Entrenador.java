@@ -1,6 +1,9 @@
 package com.FitnessSac.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -12,12 +15,15 @@ public class Entrenador {
 	private String nombre;
 	private String apellidoPaterno;
 	private String apellidoMaterno;
-	private Date fechaNacimiento;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate fechaNacimiento;
 	private String correo;
 	private String especialidad;
 	private String disponibilidad;
-	private Date fechaModificacion;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate fechaModificacion;
 	private String estado;
+
 
 	public int getId() {
 		return id;
@@ -51,11 +57,11 @@ public class Entrenador {
 		this.apellidoMaterno = apellidoMaterno;
 	}
 
-	public Date getFechaNacimiento() {
+	public LocalDate getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(Date fechaNacimiento) {
+	public void setFechaNacimiento(LocalDate fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
@@ -83,11 +89,11 @@ public class Entrenador {
 		this.disponibilidad = disponibilidad;
 	}
 
-	public Date getFechaModificacion() {
+	public LocalDate getFechaModificacion() {
 		return fechaModificacion;
 	}
 
-	public void setFechaModificacion(Date fechaModificacion) {
+	public void setFechaModificacion(LocalDate fechaModificacion) {
 		this.fechaModificacion = fechaModificacion;
 	}
 

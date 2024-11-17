@@ -24,12 +24,26 @@ public class HomeController {
 	UsuarioRepository usuarioRepository;
 	@Autowired
 	EntrenamientoRepository entrenamientoRepository;
+	@Autowired
+	InstalacionRepository instalacionRepository;
+
 
 	@GetMapping("/gestionEntrenador")
 	public String getionEntrenador(Model model) {
 		List<Entrenador> listaEntrenadores = entrenadorRepository.findAll();
 		model.addAttribute("listaEntrenadores", listaEntrenadores);
 		return "entrenador/gestionEntrenador";
+	}
+
+	@GetMapping("/gestionEntrenamiento")
+	public String gestionEntrenamiento(Model model) {
+		List<Entrenamiento> listaEntrenamientos = entrenamientoRepository.findAllByEstado("ACTIVO");
+		model.addAttribute("listaEntrenamientos",listaEntrenamientos);
+		List<Entrenador> listaEntrenadores = entrenadorRepository.findAll();
+		model.addAttribute("listaEntrenadores",listaEntrenadores);
+		List<Instalacion> listaInstalaciones = instalacionRepository.findAll();
+		model.addAttribute("listaInstalaciones",listaInstalaciones);
+		return "entrenamiento/gestionEntrenamiento";
 	}
 
 	@GetMapping("/gestionPlan")

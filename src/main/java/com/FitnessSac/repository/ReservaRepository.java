@@ -5,6 +5,7 @@ import com.FitnessSac.entity.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -13,5 +14,6 @@ public interface ReservaRepository extends JpaRepository<Reserva, Integer> {
     void deleteById(int id);
     Reserva findById(int id);
 
+    List<Reserva> findByUsuarioAndEstado(Usuario usuario, String estado);
     List<Reserva> findAllByEstado(String estado);
 }

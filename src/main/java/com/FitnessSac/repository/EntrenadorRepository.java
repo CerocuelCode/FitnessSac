@@ -11,4 +11,7 @@ public interface EntrenadorRepository extends JpaRepository<Entrenador,Integer> 
 	List<Entrenador> findAll();
 	void deleteById(int id);
 	Entrenador findById(int id);
+	List<Entrenador> findAllByEstado(String estado);
+	List<Entrenador> findByNombreContainingIgnoreCaseAndEstado(String nombre, String estado);
+	List<Entrenador> findByNombreContainingAndEstado(String nombre, String estado);
 }

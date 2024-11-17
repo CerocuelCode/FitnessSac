@@ -34,6 +34,11 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
+                        <a class="sidebar-link" th:href="@{/home/gestionEntrenamiento}" aria-expanded="false">
+                            <span class="hide-menu">Gestión de entrenamientos</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
                         <a class="sidebar-link" th:href="@{/home/gestionPlan}" aria-expanded="false">
                             <span class="hide-menu">Gestión de planes</span>
                         </a>
@@ -79,6 +84,15 @@
                             <h5 class="card-title d-flex align-items-center gap-2 mb-4">
                                 Reservas / <span>Gestión de Reservas</span>
                             </h5>
+
+                            <!-- Formulario de búsqueda por usuario -->
+                            <form th:action="@{/reserva/buscar}" method="GET" class="mb-4">
+                                <div class="input-group"> <select class="form-control" name="usuarioId">
+                                    <option value="" disabled selected>Seleccionar Usuario</option>
+                                    <option th:each="usuario : ${listaUsuarios}" th:value="${usuario.id}" th:text="${usuario.nombre}"></option>
+                                </select> <button class="btn btn-primary" type="submit">Buscar</button>
+                                </div>
+                            </form>
                             <div class="card">
                                 <div class="table-responsive">
                                     <table class="table align-middle">

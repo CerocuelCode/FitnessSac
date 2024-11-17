@@ -11,4 +11,6 @@ public interface InstalacionRepository extends JpaRepository<Instalacion, Intege
     List<Instalacion> findAll();
     void deleteById(int id);
     Instalacion findById(int id);
+
+    List<Instalacion> findAllByEstado(String estado);
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -35,6 +36,14 @@ public class ReservaController {
         return "reserva/nuevoReserva";
     }
 
+    @GetMapping("/buscar") public String buscar(@RequestParam("usuarioId") int usuarioId, Model model) {
+        Usuario usuario = usuarioRepository.findById(usuarioId);
+        List<Reserva> listaReservas = reservaRepository.findByUsuarioAndEstado(usuario, "ACTIVO");
+        model.addAttribute("listaReservas", listaReservas);
+        model.addAttribute("usuario", usuario); List<Usuario> listaUsuarios = usuarioRepository.findAllByEstado("ACTIVO");
+        model.addAttribute("listaUsuarios", listaUsuarios);
+        return "reserva/gestionReserva"; }
+
     @PostMapping("/registrar")
     public String registrar(@ModelAttribute("objReserva") Reserva reserva, Model model) {
 
@@ -45,6 +54,8 @@ public class ReservaController {
 
         return "reserva/gestionReserva";
     }
+
+
 
     @PostMapping("/actualizar")
     public String actualizar(@ModelAttribute("objReserva")Reserva reserva, Model model) {

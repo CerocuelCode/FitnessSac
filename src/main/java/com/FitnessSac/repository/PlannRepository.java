@@ -1,5 +1,6 @@
 package com.FitnessSac.repository;
 
+import com.FitnessSac.entity.Entrenador;
 import com.FitnessSac.entity.Plann;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -13,4 +14,6 @@ public interface PlannRepository extends JpaRepository<Plann, Integer> {
     Plann findById(int id);
 
     List<Plann> findAllByEstado(String estado);
+    List<Plann> findByNombreContainingIgnoreCaseAndEstado(String nombre, String estado);
+    List<Plann> findByNombreContainingAndEstado(String nombre, String estado);
 }

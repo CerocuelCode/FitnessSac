@@ -18,4 +18,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario,Integer> {
 
 	List<Usuario> findAllByEstado(String estado);
 
+	List<Usuario> findByNombreContainingIgnoreCaseAndEstado(String nombre, String estado);
+	List<Usuario> findByNombreContainingAndEstado(String nombre, String estado);
 }

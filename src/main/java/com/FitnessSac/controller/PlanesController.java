@@ -1,5 +1,6 @@
 package com.FitnessSac.controller;
 
+import com.FitnessSac.entity.Entrenador;
 import com.FitnessSac.entity.Plann;
 import com.FitnessSac.repository.PlannRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,21 @@ public class PlanesController {
         planRepository.save(plan);
         List<Plann> listaPlanes = planRepository.findAllByEstado("ACTIVO");
         model.addAttribute("listaPlanes", listaPlanes);
+        return "plan/gestionPlan";
+    }
+
+    @GetMapping("/buscar")
+    public String buscarByNombre(@RequestParam(value = "nombre") String nombre, Model model) {
+        List<Plann> listaPlanes;
+
+        if (nombre != null && !nombre.isEmpty()) {
+            listaPlanes = planRepository.findByNombreContainingIgnoreCaseAndEstado(nombre, "ACTIVO");
+        } else {
+            listaPlanes = planRepository.findAllByEstado("ACTIVO");
+        }
+
+        model.addAttribute("listaPlanes", listaPlanes);
+        model.addAttribute("nombre", nombre);
         return "plan/gestionPlan";
     }
 

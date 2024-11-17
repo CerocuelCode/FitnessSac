@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 @Entity
@@ -22,8 +23,10 @@ public class Entrenamiento {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate fecha;
-    private Time horaInicio;
-    private Time horaFin;
+    @DateTimeFormat(pattern = "HH:mm")
+    private LocalTime horaInicio;
+    @DateTimeFormat(pattern = "HH:mm")
+    private LocalTime horaFin;
     private String tipoEntrenamiento;
     private int cupoDisponible;
     private int cupoMaximo;
@@ -63,19 +66,19 @@ public class Entrenamiento {
         this.fecha = fecha;
     }
 
-    public Time getHoraInicio() {
+    public LocalTime getHoraInicio() {
         return horaInicio;
     }
 
-    public void setHoraInicio(Time horaInicio) {
+    public void setHoraInicio(LocalTime horaInicio) {
         this.horaInicio = horaInicio;
     }
 
-    public Time getHoraFin() {
+    public LocalTime getHoraFin() {
         return horaFin;
     }
 
-    public void setHoraFin(Time horaFin) {
+    public void setHoraFin(LocalTime horaFin) {
         this.horaFin = horaFin;
     }
 

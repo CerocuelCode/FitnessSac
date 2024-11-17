@@ -79,64 +79,73 @@
         <div class="container-fluid">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title fw-semibold mb-4">Nueva Reserva</h5>
+                    <h5 class="card-title fw-semibold mb-4">Nuevo Entrenador</h5>
                     <div class="card">
                         <div class="card-body">
-                            <!-- Inicio del Formulario de Registro de Plan-->
-                            <form th:action="@{/reserva/actualizar}" th:object="${objReserva}" method="POST">
-                                <div class="mb-3">
-                                    <input type="hidden" class="form-control" id="id" th:field="*{id}">
-                                </div>
-                                <div class="mb-3 col-md-4" style="display: none;">
+                            <!-- Inicio del Formulario de Registro de Entrenador-->
+                            <form th:action="@{/entrenador/registrar}" th:object="${objEntrenador}" method="POST">
+                                <div class="mb-3" style="display: none;">
                                     <label for="fechaModificacion" class="form-label"> Fecha Modificacion: </label>
                                     <input type="date" class="form-control" id="fechaModificacion" th:field="*{fechaModificacion}">
                                 </div>
                                 <div class="row">
-                                    <div class="mb-3 col-md-6">
-                                        <label for="usuario" class="form-label"> Usuario:</label>
-                                        <select id="usuario" class="select2 form-select" th:field="*{usuario}">
-                                            <option th:each="usuario : ${listaUsuarios}" th:value="${usuario.id}" th:text="${usuario.apellidoPaterno} + ' ' + ${usuario.apellidoMaterno} + ' ' + ${usuario.nombre}"></option>
-                                        </select>
+                                    <div class="mb-3 col-md-4">
+                                        <label for="nombre" class="form-label"> Nombre: </label>
+                                        <input type="text" class="form-control" id="nombre" aria-describedby="emailHelp" th:field="*{nombre}">
                                     </div>
-                                    <div class="mb-3 col-md-6">
-                                        <label for="entrenamiento" class="form-label"> Entrenamiento:</label>
-                                        <select id="entrenamiento" class="select2 form-select" th:field="*{entrenamiento}">
-                                            <option th:each="entrenamiento : ${listaEntrenamientos}" th:value="${entrenamiento.id}" th:text="${entrenamiento.fecha} + ' ' + ${entrenamiento.tipoEntrenamiento}"></option>
-                                        </select>
+                                    <div class="mb-3 col-md-4">
+                                        <label for="apellidoPaterno" class="form-label"> Apellido paterno: </label>
+                                        <input type="text" class="form-control" id="apellidoPaterno" th:field="*{apellidoPaterno}"></input>
+                                    </div>
+                                    <div class="mb-3 col-md-4">
+                                        <label for="apellidoMaterno" class="form-label"> Apellido materno: </label>
+                                        <input type="text" class="form-control" id="apellidoMaterno" th:field="*{apellidoMaterno}"></input>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="mb-3 col-md-4">
-                                        <label for="estadoReserva" class="form-label"> Estado Reserva: </label>
-                                        <select id="estadoReserva" class="select2 form-select" th:field="*{estadoReserva}">
-                                            <option th:value="CONFIRMADA">Confirmada</option>
-                                            <option th:value="PENDIENTE">Pendiente</option>
-                                            <option th:value="CANCELADA">Cancelada</option>
+                                    <div class="mb-3 col-md-12">
+                                        <label for="correo" class="form-label"> Correo: </label>
+                                        <input type="email" class="form-control" id="correo" th:field="*{correo}"></input>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label for="fechaNacimiento" class="form-label"> Fecha de nacimiento: </label>
+                                        <input type="date" class="form-control" id="fechaNacimiento" th:field="*{fechaNacimiento}">
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="especialidad" class="form-label"> Especialidad: </label>
+                                        <input type="text" class="form-control" id="especialidad" th:field="*{especialidad}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label for="disponibilidad" class="form-label"> Disponibilidad: </label>
+                                        <select id="disponibilidad" class="select2 form-select" th:field="*{disponibilidad}">
+                                            <option th:value="DISPONIBLE">Disponible</option>
+                                            <option th:value="NO_DISPONIBLE">No disponible</option>
                                         </select>
                                     </div>
-                                    <div class="mb-3 col-md-4">
-                                        <label for="fechaReserva" class="form-label"> Fecha Reserva: </label>
-                                        <input type="date" class="form-control" id="fechaReserva" th:field="*{fechaReserva}">
-                                    </div>
-                                    <div class="mb-3 col-md-4">
-                                        <label for="estado" class="form-label">Estado</label>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="estado" class="form-label"> Estado: </label>
                                         <select id="estado" class="select2 form-select" th:field="*{estado}">
                                             <option th:value="ACTIVO">Activo</option>
                                             <option th:value="INACTIVO">Inactivo</option>
                                         </select>
                                     </div>
                                 </div>
-                                <button type="submit" name="registrar" class="btn btn-primary">Actualizar</button>
+                                <button type="submit" name="registrar" class="btn btn-primary">Registrar</button>
                             </form>
-                            <!-- Fin del Formulario de Registro de Plan-->
+                            <!-- Fin del Formulario de Registro de Entrenador-->
                         </div>
                     </div>
                 </div>
             </div>
             <div class="py-6 px-6 text-center">
-                <p class="mb-0 fs-4">Design and Developed by <a href="https://adminmart.com/" target="_blank"
-                                                                class="pe-1 text-primary text-decoration-underline">AdminMart.com</a> Distributed by <a href="https://themewagon.com/" target="_blank"
-                                                                                                                                                        class="pe-1 text-primary text-decoration-underline">ThemeWagon</a></p>
+                <p class="mb-0 fs-4">Design and Developed by
+                    <a href="https://adminmart.com/" target="_blank" class="pe-1 text-primary text-decoration-underline">AdminMart.com</a> Distributed by
+                    <a href="https://themewagon.com/" target="_blank" class="pe-1 text-primary text-decoration-underline">ThemeWagon</a>
+                </p>
             </div>
         </div>
     </div>

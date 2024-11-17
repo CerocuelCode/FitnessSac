@@ -1,5 +1,6 @@
 package com.FitnessSac.repository;
 
+import com.FitnessSac.entity.Entrenador;
 import com.FitnessSac.entity.Entrenamiento;
 import com.FitnessSac.entity.Reserva;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,5 +15,7 @@ public interface EntrenamientoRepository extends JpaRepository<Entrenamiento, In
     Entrenamiento findById(int id);
 
     List<Entrenamiento> findAllByEstado(String estado);
+    boolean existsByEntrenador_idAndEstado(int entrenadorId, String estado);
+    List<Entrenamiento> findByEntrenadorInAndEstado(List<Entrenador> entrenadores, String estado);
 
 }
