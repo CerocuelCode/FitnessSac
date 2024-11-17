@@ -36,7 +36,8 @@ public class ReservaController {
         return "reserva/nuevoReserva";
     }
 
-    @GetMapping("/buscar") public String buscar(@RequestParam("usuarioId") int usuarioId, Model model) {
+    @GetMapping("/buscar")
+    public String buscar(@RequestParam("usuarioId") int usuarioId, Model model) {
         Usuario usuario = usuarioRepository.findById(usuarioId);
         List<Reserva> listaReservas = reservaRepository.findByUsuarioAndEstado(usuario, "ACTIVO");
         model.addAttribute("listaReservas", listaReservas);
@@ -46,12 +47,25 @@ public class ReservaController {
 
     @PostMapping("/registrar")
     public String registrar(@ModelAttribute("objReserva") Reserva reserva, Model model) {
-
+        // Buscar el usuario y entrenamiento asociados por sus IDs
+        Usuario usuario = usuarioRepository.findById(reserva.getUsuario().getId());
+        Entrenamiento entrenamiento = entrenamientoRepository.findById(reserva.getEntrenamiento().getId());
+        // Verificar que ambos usuario y entrenamiento no sean null
+        if (usuario != null && entrenamiento != null) {
+            reserva.setUsuario(usuario);
+            reserva.setEntrenamiento(entrenamiento);
+            reserva.setFechaModificacion(LocalDate.now());
+            // Guardar la reserva en el repositorio
+            reservaRepository.save(reserva);
+            } else {
+            model.addAttribute("message", "Error: Usuario o Entrenamiento no encontrados.");
+        }
         List<Reserva> listaReservas = reservaRepository.findAllByEstado("ACTIVO");
         model.addAttribute("listaReservas", listaReservas);
-
-        reservaRepository.save(reserva);
-
+        List<Usuario> listaUsuarios = usuarioRepository.findAllByEstado("ACTIVO");
+        model.addAttribute("listaUsuarios", listaUsuarios);
+        List<Entrenamiento> listaEntrenamientos = entrenamientoRepository.findAllByEstado("ACTIVO");
+        model.addAttribute("listaEntrenamientos", listaEntrenamientos);
         return "reserva/gestionReserva";
     }
 
